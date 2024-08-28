@@ -1,72 +1,152 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #define MAXLEN 80
 
-typedef struct rec {
+typedef struct Student
+{
+    struct data
+    {
         int roll;
         char name[MAXLEN];
         int score;
-}rec;
+    } data;
+
+    struct Student *next;
+} Student;
 
 
-void inputData(rec arr[], int n) {
-        for (int i = 0; i< n; i++) {
-                printf("Enter student %d roll: ",i+1);
-                scanf("%d",&(arr[i].roll));
-                printf("Enter student %d name: ",i+1);
-                scanf("%s", arr[i].name);
-                printf("Enter student %d score: ",i+1);
-                scanf("%d", &(arr[i].score));
+void insert(Student **head)
+{
+    Student *ptr = (Student *)malloc(sizeof(Student));
+    Student *ptr1;
+    ptr->next = NULL;
+
+    int r, s;
+    char n[MAXLEN];
+    
+    printf("\nEnter roll of student: ");
+    scanf("%d", &(ptr->data).roll);
+
+    printf("Enter name of student: ");
+    scanf("%s", (ptr->data).name);
+
+    printf("Enter score of student: ");
+    scanf("%d", &(ptr->data).score);
+
+    if (*head == NULL)
+    {
+        *head = ptr;
+    }
+
+    else
+    {
+        ptr1 = *head;
+        while (ptr1->next != NULL)
+        {
+            ptr1 = ptr1->next;
         }
+        ptr1->next = ptr;
+    }
 }
 
 
-void printData(rec arr[], int n) {
-        printf("\nRoll\t\tName\t\tScore\n");
-        for (int i = 0; i < n; i++) {
-                printf("%d\t\t%s\t\t%d\n", arr[i].roll, arr[i].name, arr[i].score);
+void delete(Student **head, int roll)
+{
+    Student *p1 = *head, *p2 = p1->next;
+
+    if ((p1->data).roll == roll)
+    {
+        *head = p2;
+        free(p1);
+        return;
+    }
+
+    if (p2 == NULL)
+    {
+        printf("\nRoll not found\n");
+        return;
+    }
+
+    while (p2->next != NULL)
+    {
+        if ((p2->data).roll == roll)
+        {
+            break;
         }
+        p2 = p2->next;
+        p1 = p1->next;
+    }
+
+    if (p2->next == NULL)
+    {
+        printf("\nRoll not found\n");
+        return;
+    }
+
+    p1->next = p2->next;
+    free(p2);
 }
 
-void addData(rec arr[], int n) {
-	re
-	printf("Enter roll");
-	scanf("%d", &(info->roll));
-	printf("Enter name: ");
-	scanf("%s", &(info->name));
-	printf("Enter score: ");
-	scanf("%d", &(info->score));
-
-	arr[n+1] = 
+void display(Student *head)
+{
+    Student *ptr = (Student *)malloc(sizeof(Student));
+    ptr = head;
+    
+    int i = 1;
+    printf("\n\t\t\t\tTABLE\nS.No\t\t\tRoll\t\t\tName\t\t\tScore\n");
+        while (ptr != NULL)
+    {
+        printf("%d\t\t\t%d\t\t\t%s\t\t\t%d\n", i++, (ptr->data).roll, (ptr->data).name, (ptr->data).score);
+        ptr = ptr->next;
+    }
 }
 
+int main()
+{
+    Student *head = NULL;
 
-int main() {
-	rec arr[100];
-	int n, ch;
-	printf("Enter number of students: ");
-	scanf("%d", &n);
+    bool running = true;
+    int ch, r;
 
-	inputData(arr, n);
-	printData(arr, n);
+    while (running)
+    {
+        printf("\nEnter choice:\n1. Insert Record\n2. Delete Record\n3. Display Record\n4. Exit\n\n");
+        scanf("%d", &ch);
 
-	int running = 1;
-	while (running) {
-		printf("Enter 1 to add, 2 to delete, 3 to quit\n");
-		if (ch == 1) {
-			
-		}
+        switch (ch)
+        {
+        case 1:
+            insert(&head);
+            break;
 
-		else if (ch == 2) {
+        case 2:
+            if (head == NULL)
+            {
+                printf("Can't delete data from empty table. Pls insert\n");
+            }
+            else
+            {
+                printf("Enter roll to delete: ");
+                scanf("%d", &r);
+                delete (&head, r);
+            }
+            break;
 
-		}
+        case 3:
+            display(head);
+            break;
 
-		else {
-			running = 0;
-		}
-	}
+        case 4:
+            printf("Thank You\n");
+            running = false;
+            break;
 
-	printf("Bye Bye");
-	
-	return 0;
+        default:
+            printf("Invalid Choice. Enter again\n");
+            break;
+        }
+    }
+
+    return 0;
 }
-
