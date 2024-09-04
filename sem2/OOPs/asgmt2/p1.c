@@ -1,4 +1,4 @@
-#include <stdio.h>
+	#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -157,6 +157,8 @@ void editRecord(const char *fn)
     Student student;
     FILE *fp = fopen(fn, "rb+");
 
+    int ch, i;
+
     printf("Enter Roll Number to edit: ");
     scanf("%d", &roll);
 
@@ -164,24 +166,35 @@ void editRecord(const char *fn)
     {
         if (student.roll == roll && student.isDeleted == 0)
         {
-            printf("Record Found. Enter new details.\n");
-            printf("Enter Name: ");
-            scanf("%s", student.name);
-            printf("Enter Scores for 5 subjects:\n");
-            for (int i = 0; i < 5; i++)
-            {
-                scanf("%d", &student.scores[i]);
-            }
-            fseek(fp, -sizeof(student), SEEK_CUR);
-            fwrite(&student, sizeof(student), 1, fp);
-            fclose(fp);
-            printf("Record updated successfully.\n");
-            return;
-        }
+            printf("Which field you want to edit?\n1. Name\n2. Marks\n3. Exit\n");
+	    scanf("%d", &ch);
+
+	    if (ch >= 3) break;
+	    if (ch == 1) {
+		printf("Enter Name: ");
+		scanf("%s", student.name);
+	    }
+	    if (ch == 2) {
+		printf("Which marks[1-5]: ");
+		scanf("%d", &i);
+		printf("Enter marks: ");
+		scanf("%d", &student.scores[i-1]);
+	    }
+
+	    fseek(fp, -sizeof(student), SEEK_CUR);
+	    fwrite(&student, sizeof(student), 1, fp);
+	    printf("Data edited");
+	    fclose(fp);
+	    return;
+	}
     }
 
-    printf("Record not found.\n");
+    if (feof(fp)) {
+	printf("Record not found.\n");
+    }
+
     fclose(fp);
+    return;
 }
 
 void logicalDelete(const char *fn)
