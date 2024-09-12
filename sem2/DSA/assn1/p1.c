@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <limits.h>
 
 void factorialIterative(int n)
@@ -21,6 +22,12 @@ void factorialIterative(int n)
                 printf("\nOverflow occurred at i = %d, switching to long long\n", i);
                 p = 1;
             }
+        }
+
+        if (flag == 1 && i >= LONG_MAX / fact)
+        {
+            printf("Factorial too large. Aborting....\n");
+            exit(0);
         }
 
         // After overflow, switch to long long and continue calculation
@@ -85,28 +92,20 @@ void factorialRecursive(int i, int flag, int n, long long fact, int f)
 
 int main()
 {
-    int n1, n2;
-    printf("Enter values of n1 and n2: ");
-    scanf("%d %d", &n1, &n2);
+    int n;
+    printf("Enter values of n: ");
+    scanf("%d", &n);
 
-    printf("\nITERATIVE: n1 = %d, n2 = %d\n", n1, n2);
-    // iterative (without overflow)
-    printf("\ncalculating %d!...", n1);
-    factorialIterative(n1);
-
-    // iterative (with overflow)
-    printf("\ncalculating %d!...", n2);
-    factorialIterative(n2);
+    printf("\nITERATIVE: n = %d\n", n);
+    printf("\ncalculating %d!...", n);
+    factorialIterative(n);
 
     printf("---------------------------------------------------------------\n");
-    printf("\nRECURSIVE: n1 = %d, n2 = %d\n", n1, n2);
-    // recursive (without overflow)
-    printf("\ncalculating %d!...", n1);
-    factorialRecursive(1, 0, n1, 1, 1);
 
-    // recursive (with overflow)
-    printf("\ncalculating %d!...", n2);
-    factorialRecursive(1, 0, n2, 1, 1);
+    printf("\nRECURSIVE: n = %d\n", n);
+    // recursive (without overflow)
+    printf("\ncalculating %d!...", n);
+    factorialRecursive(1, 0, n, 1, 1);
 
     return 0;
 }

@@ -142,7 +142,7 @@ int main()
         }
         else
         {
-            printf("Element found");
+            printf("Element found\n");
         }
         break;
     }
@@ -179,7 +179,7 @@ int main()
         }
         else
         {
-            printf("Element found");
+            printf("Element found\n");
         }
         break;
     }
@@ -216,7 +216,7 @@ int main()
         }
         else
         {
-            printf("Element found");
+            printf("Element found\n");
         }
         break;
     }
