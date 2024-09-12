@@ -162,7 +162,7 @@ int main()
     printf("\n\nDo you want to plot graph? (y/n): ");
     scanf("%c", &ch);
 
-    if (ch == 'Y' || ch == 'y')
+    if (ch == 'y' || ch == 'Y')
     {
         printf("Enter range of x: ");
         scanf("%d", &x);
