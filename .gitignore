@@ -4,4 +4,4 @@
 # ignore all .out files
 *.out
 
-.vscode
+*.vscode
