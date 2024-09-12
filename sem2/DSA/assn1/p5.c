@@ -1,19 +1,21 @@
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 #include <stdlib.h>
+#define RANGE 1e6
 
 int main()
 {
     srand(time(NULL));
 
     FILE *fp;
-    if ((fp = fopen("data1.txt", "w+")) == NULL)
+    if ((fp = fopen("p5.txt", "w+")) == NULL)
     {
         printf("Cannot open file\n");
         exit(1);
     }
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < RANGE; i++)
     {
         char s[12];
         for (int j = 0; j < 10; j++)
@@ -22,7 +24,10 @@ int main()
         }
         s[10] = '\n';
         s[11] = '\0';
-        fputs(s, fp);
+
+        // strcat(s, "\n\0");
+
+        fprintf(fp, "%s", s);
     }
 
     fclose(fp);

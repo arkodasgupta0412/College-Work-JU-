@@ -2,18 +2,18 @@
 #include <string.h>
 #include <stdlib.h>
 
-void convertAndPrintSum(char name[])
+void convertAndPrintSum(char full_name[])
 {
     char largeIntStr[1000] = "";
 
-    for (int i = 0; i < strlen(name); i++)
+    for (int i = 0; i < strlen(full_name); i++)
     {
         char asciiStr[4];
-        sprintf(asciiStr, "%d", (int)name[i]);
+        sprintf(asciiStr, "%d", (int)full_name[i]);
         strcat(largeIntStr, asciiStr);
     }
 
-    printf("Large Integer: %s\n", largeIntStr);
+    printf("\nLarge Integer: %s\n", largeIntStr);
 
     int len = strlen(largeIntStr), mid = len / 2;
 
@@ -24,6 +24,9 @@ void convertAndPrintSum(char name[])
 
     strcpy(secondHalf, largeIntStr + mid);
 
+    printf("\nFirst Half: %s\n", firstHalf);
+    printf("Second Half: %s\n", secondHalf);
+
     // Converting halves to integers
     long long int firstHalfInt = atoll(firstHalf);
     long long int secondHalfInt = atoll(secondHalf);
@@ -31,25 +34,21 @@ void convertAndPrintSum(char name[])
     // Adding two halves
     long long int sum = firstHalfInt + secondHalfInt;
 
-    printf("Sum of the two halves: %lld\n", sum);
+    printf("\nSum of the two halves: %lld\n", sum);
 }
 
 int main()
 {
-    char name[100];
-    char surname[100];
+    char first_name[100];
+    char last_name[100];
 
-    printf("Enter your name: ");
-    scanf("%s", name);
+    printf("Enter your first name: ");
+    scanf("%s", first_name);
 
-    printf("Enter your surname: ");
-    scanf("%s", surname);
+    printf("Enter your last name: ");
+    scanf("%s", last_name);
 
-    printf("\nFor Name:\n");
-    convertAndPrintSum(name);
-
-    printf("\nFor Surname:\n");
-    convertAndPrintSum(surname);
+    convertAndPrintSum(strcat(first_name, last_name));
 
     return 0;
 }

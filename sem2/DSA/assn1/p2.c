@@ -115,7 +115,28 @@ void fibonacciRecursive(int i, int flag, int n)
 
 int main()
 {
-    int n = 93;
-    fibonacciRecursive(2, 0, n);
+    int n1, n2;
+    printf("Enter values of n1 and n2: ");
+    scanf("%d %d", &n1, &n2);
+
+    printf("\nITERATIVE: n1 = %d, n2 = %d\n", n1, n2);
+    // iterative (without overflow)
+    printf("\ncalculating %dth fibonacci number...", n1);
+    fibonacciIterative(n1);
+
+    // iterative (with overflow)
+    printf("\ncalculating %dth fibonacci number...", n2);
+    fibonacciIterative(n2);
+
+    printf("---------------------------------------------------------------\n");
+    printf("\nRECURSIVE: n1 = %d, n2 = %d\n", n1, n2);
+    // recursive (without overflow)
+    printf("\ncalculating %dth fibonacci number...", n1);
+    fibonacciRecursive(1, 0, n1);
+
+    // recursive (with overflow)
+    printf("\ncalculating %dth fibonacci number...", n2);
+    fibonacciRecursive(1, 0, n2);
+
     return 0;
 }

@@ -10,13 +10,14 @@ int compareInt(const void *a, const void *b)
 
 int compareFloat(const void *a, const void *b)
 {
-    float diff = (*(float *)a - *(float *)b);
-    return (diff > 0) - (diff < 0);
+    return (*(float *)a - *(float *)b);
+    // float diff = (*(float *)a - *(float *)b);
+    // return (diff > 0) - (diff < 0);
 }
 
 int compareString(const void *a, const void *b)
 {
-    return strcmp(*(const char **)a, *(const char **)b);
+    return strcmp((const char *)a, (const char *)b);
 }
 
 int linearSearchInt(int arr[], int n, int t)
@@ -141,7 +142,7 @@ int main()
         }
         else
         {
-            printf("Element found at index %d\n", ans);
+            printf("Element found");
         }
         break;
     }
@@ -178,7 +179,7 @@ int main()
         }
         else
         {
-            printf("Element found at index %d\n", ans);
+            printf("Element found");
         }
         break;
     }
@@ -189,12 +190,12 @@ int main()
         printf("Enter %d elements:\n", n);
         for (int i = 0; i < n; i++)
         {
-            scanf("%s", &arr[i]);
+            scanf("%s", arr[i]);
         }
 
         char x[MAXLEN];
         printf("Enter element to search: ");
-        scanf("%s", &x);
+        scanf("%s", x);
 
         printf("Enter choice:\n1. Linear Search\n2. Binary Search\n");
         scanf("%d", &ch2);
@@ -205,7 +206,7 @@ int main()
         }
         else
         {
-            qsort(arr, n, sizeof(char *), compareString);
+            qsort(arr, n, sizeof(arr[0]), compareString);
             ans = binarySearchString(arr, n, x);
         }
 
@@ -215,7 +216,7 @@ int main()
         }
         else
         {
-            printf("Element found at index %d\n", ans);
+            printf("Element found");
         }
         break;
     }
