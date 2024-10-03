@@ -46,7 +46,7 @@ void insertElement(SparseMatrix *mat, int row, int col, int value)
     }
 }
 
-// Display the sparse matrix
+// Display the sparse matrix in coordinate format
 void displaySparseMatrix(const SparseMatrix *mat)
 {
     if (mat->head == NULL)
@@ -138,7 +138,7 @@ SparseMatrix *multiplySparseMatrices(const SparseMatrix *mat1, const SparseMatri
     return result;
 }
 
-// Delete the sparse matrix
+// Delete the sparse matrix and free memory
 void deleteSparseMatrix(SparseMatrix *mat)
 {
     Node *current = mat->head;

@@ -22,11 +22,11 @@ typedef struct SparseMatrix
 } SparseMatrix;
 
 // Function declarations
-SparseMatrix *createSparseMatrix(int, int);
-void insertElement(SparseMatrix, int, int, int v);
-void displaySparseMatrix(const SparseMatrix);
-SparseMatrix *addSparseMatrices(const SparseMatrix *, const SparseMatrix *);
-SparseMatrix *multiplySparseMatrices(const SparseMatrix *, const SparseMatrix *);
-void deleteSparseMatrix(SparseMatrix *);
+SparseMatrix *createSparseMatrix(int rows, int cols);
+void insertElement(SparseMatrix *mat, int row, int col, int value);
+void displaySparseMatrix(const SparseMatrix *mat);
+SparseMatrix *addSparseMatrices(const SparseMatrix *mat1, const SparseMatrix *mat2);
+SparseMatrix *multiplySparseMatrices(const SparseMatrix *mat1, const SparseMatrix *mat2);
+void deleteSparseMatrix(SparseMatrix *mat);
 
 #endif // P2_H
