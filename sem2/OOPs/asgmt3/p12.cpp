@@ -1,148 +1,187 @@
 #include <iostream>
-#include <string.h>
-#define MAX 100
-#define MAXNAME 20
+#include <string>
 using namespace std;
-
-class ItemList;
 
 class Item
 {
     int code;
-    char name[MAXNAME];
-    float rate;
+    string name;
+    double rate;
     int qty;
 
 public:
-    void get()
+    Item(int code = 0, string name = "", double rate = 0.0, int qty = 0) : code(code), name(name), rate(rate), qty(qty) {}
+
+    int getCode() const
     {
-        cout << "Enter item code, name, rate and quantity: ";
-        cin >> code >> name >> rate >> qty;
+        return code;
     }
 
-    friend class ItemList;
-};
+    int getQuantity()
+    {
+        return qty;
+    }
 
+    float getRate()
+    {
+        return rate;
+    }
+
+    void updateQuantity(int q)
+    {
+        qty = q;
+    }
+
+    void changeRate(double newRate)
+    {
+        rate = newRate;
+    }
+
+    void display()
+    {
+        cout << code << "\t\t" << name << "\t\t" << rate << "\t\t" << qty << "\n";
+    }
+};
 class ItemList
 {
-    Item list[MAX];
-    static int count;
-    int checkUnique(int code)
+    Item *list;
+    int size;
+    int capacity;
+    bool isUnique(int code)
     {
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < size; i++)
         {
-            /* not unique */
-            if (list[i].code == code)
-                return 0;
+            if (list[i].getCode() == code)
+                return false;
         }
-        /* unique */
-        return 1;
+        return true;
     }
 
-    int search(const char c[])
+    int search(int code)
     {
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < size; i++)
         {
-            if (!strcmp(list[i].name, c))
+            if (list[i].getCode() == code)
+            {
                 return i;
+            }
         }
         return -1;
     }
 
 public:
-    int add()
+    ItemList(int n)
     {
-        /* returns 0 on successful addition, else -1 */
-        Item i;
-        i.get();
-        if (checkUnique(i.code))
+        list = new Item[n];
+        capacity = n;
+        size = 0;
+    }
+    void addItem(int code, string name, double rate, int qty)
+    {
+        if (!isUnique(code))
         {
-            list[count++] = i;
-            return 0;
+            cout << "\nCode not unique" << "\n";
+            return;
         }
-        cout << "Item code not unique" << endl;
-        return -1;
+        if (size == capacity)
+        {
+            cout << "\nList is full\n";
+            return;
+        }
+        list[size] = Item(code, name, rate, qty);
+        size++;
     }
 
-    int changeRate(const char c[], float r)
+    void issueItem(int code, int qty)
     {
-        /* returns 0 on successful rate change, else -1 */
-        int pos = search(c);
+        int pos = search(code);
         if (pos != -1)
         {
-            list[pos].rate = r;
-            return 0;
-        }
-        cout << "Item not found\n";
-        return -1;
-    }
-
-    int getItem(const char c[], int q)
-    {
-        /* returns 0 on successful purchase, else -1, if purchase qty > stock, returns 1 */
-        int pos = search(c);
-        if (pos != -1)
-        {
-            if (list[pos].qty < q)
+            int q = list[pos].getQuantity();
+            if (q < qty)
             {
-                cout << "Only " << q << " in stock\n";
-                return 1;
+                cout << "\nOnly " << q << " items are left in stock\n";
             }
             else
             {
-                list[pos].qty -= q;
+                list[pos].updateQuantity(q - qty);
             }
-            return 0;
         }
-        cout << "Item not found\n";
-        return -1;
+        else
+        {
+            cout << "\nItem not present in list\n";
+        }
     }
 
-    float getPrice(const char c[])
+    void receiveItem(int code, int qty)
     {
-        /* returns 0 if item found, prints price, else returns -1 */
-        int pos = search(c);
+        int pos = search(code);
         if (pos != -1)
         {
-            cout << "Rs " << list[pos].rate * list[pos].qty << endl;
-            return 0;
+            int q = list[pos].getQuantity();
+            list[pos].updateQuantity(q + qty);
         }
-        cout << "item not found\n";
-        return -1;
+        else
+        {
+            string s;
+            double r;
+            cout << "\nNew item being added...\n";
+            cout << "Item name: ";
+            cin >> s;
+            cout << "Rate: ";
+            cin >> r;
+            addItem(code, s, r, qty);
+        }
+    }
+
+    void getItemPrice(int code)
+    {
+        int pos = search(code);
+        if (pos != -1)
+        {
+            int q = list[pos].getQuantity();
+            double r = list[pos].getRate();
+            cout << "\nDetails of Item code-" << code << "\n";
+            cout << "Price:" << q * r << ", Quantity:" << q << "\n";
+        }
+        else
+        {
+            cout << "\nItem not in list\n";
+        }
+    }
+
+    void updateRate(int code, double newRate)
+    {
+        int pos = search(code);
+        if (pos != -1)
+        {
+            double r = list[pos].getRate();
+            r = newRate;
+            cout << "\nRate updated to new rate\n";
+        }
+        else
+        {
+            cout << "\nItem not in list\n";
+        }
     }
 
     void show()
     {
-        cout << "\nCode\t\tName\t\tRate\t\tQuantity" << endl;
-        for (int i = 0; i < count; i++)
+        cout << "\nCode\t\tName\t\tRate\t\tQty\n";
+        for (int i = 0; i < size; i++)
         {
-            cout << list[i].code << "\t\t" << list[i].name << "\t\t" << list[i].rate << "\t\t" << list[i].qty << endl;
+            list[i].display();
         }
     }
 };
-
-int ItemList::count = 0;
-
 int main()
 {
-    ItemList list;
-    list.add();
-    list.add();
-    list.add();
-    list.show();
-
-    list.changeRate("shoe", 5.212);
-    list.show();
-
-    list.changeRate("bag", 12.12);
-    list.show();
-
-    list.getItem("bag", 2);
-    list.show();
-
-    list.getItem("shoe", 5);
-    list.show();
-
-    list.getPrice("table");
-    list.show();
+    ItemList ilist(5);
+    ilist.addItem(1213, "Bag", 0.5, 10);
+    ilist.addItem(12798, "Fan", 7, 8);
+    ilist.show();
+    ilist.receiveItem(1213, 7);
+    ilist.issueItem(12798, 5);
+    ilist.show();
+    ilist.getItemPrice(1213);
 }
