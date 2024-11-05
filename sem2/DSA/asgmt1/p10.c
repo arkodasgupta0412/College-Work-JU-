@@ -2,7 +2,6 @@
 #include <string.h>
 #define MAXLEN 100
 
-// Function to calculate the edit distance with only insert and delete operations
 int editDistance(char *X, char *Y)
 {
     int m = strlen(X), n = strlen(Y);

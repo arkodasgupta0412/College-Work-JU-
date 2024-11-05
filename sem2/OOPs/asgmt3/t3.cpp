@@ -13,13 +13,10 @@ public:
         if (s == 0)
             arr = NULL;
 
-        else
+        arr = new int[s];
+        for (int i = 0; i < size; i++)
         {
-            arr = new int[s];
-            for (int i = 0; i < size; i++)
-            {
-                arr[i] = e;
-            }
+            arr[i] = e;
         }
     }
 
@@ -45,18 +42,14 @@ public:
         size = s;
         if (s == 0)
             arr = NULL;
-
-        else
+        arr = new int[s];
+        for (int i = 0; i < size; i++)
         {
-            arr = new int[s];
-            for (int i = 0; i < size; i++)
-            {
-                arr[i] = a[i];
-            }
+            arr[i] = a[i];
         }
     }
 
-    Array operator+(const Array &a)
+    Array operator+(const Array a)
     {
         Array res(max(size, a.size));
         int i = 0;
@@ -81,18 +74,11 @@ public:
         return res;
     }
 
-    Array &operator=(const Array &a)
+    Array operator=(const Array a)
     {
-        // Case: self-assignment
-        if (this == &a)
-            return *this;
-
-        delete[] arr;
-
         size = a.size;
         if (size != 0)
         {
-            arr = new int[size];
             for (int i = 0; i < size; i++)
             {
                 arr[i] = a.arr[i];
@@ -106,19 +92,18 @@ public:
         return *this;
     }
 
-    int &operator[](int i)
+    Array operator[](int i)
     {
         return arr[i];
     }
 
     Array operator*(int k)
     {
-        Array res(size);
         for (int i = 0; i < size; i++)
         {
-            res.arr[i] = arr[i] * k;
+            arr[i] *= k;
         }
-        return res;
+        return *this;
     }
 
     ~Array()
@@ -135,13 +120,12 @@ public:
 
 Array operator*(int k, const Array a)
 {
-    Array res(a.size);
     for (int i = 0; i < a.size; i++)
     {
-        res.arr[i] = a.arr[i] * k;
+        a.arr[i] *= k;
     }
 
-    return res;
+    return a;
 }
 
 ostream &operator<<(ostream &cout, const Array &a)
@@ -166,12 +150,10 @@ int main()
 
     cout << a2 + a4;
     Array a5;
-    a5 = a4;
+    a5 = a2;
     cout << a5;
 
     cout << a4 * 3;
 
     cout << 2 * a2;
-
-    cout << a4[1];
 }

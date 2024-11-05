@@ -14,7 +14,8 @@ public:
     Complex(float x, float y) : r(x), im(y) {}
 
     // overloading the ostream reference 'cout'
-    friend ostream &operator<<(ostream &os, const Complex &z);
+    friend ostream &operator<<(ostream &, const Complex &);
+    friend istream &operator>>(istream &, Complex &);
 
     float mod()
     {
@@ -55,25 +56,39 @@ public:
 // overloaded cout for usage in Complex types
 ostream &operator<<(ostream &os, const Complex &z)
 {
-    if (z.im < 0)
-        os << z.r << " + " << "(" << z.im << ")i" << endl;
+    os << "(" << z.r << ")" << " + " << "(" << z.im << ")i";
+    return os;
+}
 
-    else
-        os << z.r << " + " << z.im << "i" << endl;
+istream &operator>>(istream &is, Complex &z)
+{
+    is >> z.r;
+    is >> z.im;
+    return is;
 }
 
 int main()
 {
-    Complex c1;
-    Complex c2(4, 3);
-    Complex c3(2);
-    Complex c4(9, 5);
+    // Complex c1;
+    // Complex c2(4, 3);
+    // Complex c3(2);
+    // Complex c4(9, 5);
+
+    Complex c1, c2, c3, c4;
+    cout << "Enter complex number c1: ";
+    cin >> c1;
+    cout << "Enter complex number c2: ";
+    cin >> c2;
+    cout << "Enter complex number c3: ";
+    cin >> c3;
+    cout << "Enter complex number c4: ";
+    cin >> c4;
 
     // operations
-    cout << c1 + c2;
-    cout << (c3 - c4);
-    cout << c2.conjugate();
+    cout << c1 + c2 << endl;
+    cout << (c3 - c4) << endl;
+    cout << c2.conjugate() << endl;
     cout << c4.mod() << endl;
-    cout << (c2 * c3);
-    cout << (c2 / c4);
+    cout << (c2 * c3) << endl;
+    cout << (c2 / c4) << endl;
 }

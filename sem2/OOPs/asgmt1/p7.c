@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #define MAXLEN 80
 
+// self referential structure
 typedef struct Student
 {
     struct data
@@ -15,7 +16,6 @@ typedef struct Student
     struct Student *next;
 } Student;
 
-
 void insert(Student **head)
 {
     Student *ptr = (Student *)malloc(sizeof(Student));
@@ -24,7 +24,7 @@ void insert(Student **head)
 
     int r, s;
     char n[MAXLEN];
-    
+
     printf("\nEnter roll of student: ");
     scanf("%d", &(ptr->data).roll);
 
@@ -50,11 +50,11 @@ void insert(Student **head)
     }
 }
 
-
 void delete(Student **head, int roll)
 {
     Student *p1 = *head, *p2 = p1->next;
 
+    // deleting head node
     if ((p1->data).roll == roll)
     {
         *head = p2;
@@ -62,6 +62,7 @@ void delete(Student **head, int roll)
         return;
     }
 
+    // if only one node is present in list of students
     if (p2 == NULL)
     {
         printf("\nRoll not found\n");
@@ -92,10 +93,10 @@ void display(Student *head)
 {
     Student *ptr = (Student *)malloc(sizeof(Student));
     ptr = head;
-    
+
     int i = 1;
     printf("\n\t\t\t\tTABLE\nS.No\t\t\tRoll\t\t\tName\t\t\tScore\n");
-        while (ptr != NULL)
+    while (ptr != NULL)
     {
         printf("%d\t\t\t%d\t\t\t%s\t\t\t%d\n", i++, (ptr->data).roll, (ptr->data).name, (ptr->data).score);
         ptr = ptr->next;
