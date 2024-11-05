@@ -77,3 +77,45 @@ public:
         }
     }
 };
+
+int main() {
+	Stack st(10);
+
+	int ch, running = 1;
+	while (running) {
+		cout << "Enter choice:\n1. Push\n2. Pop\n3. Peek\n4. Display\n5. Exit" << endl;
+		cin >> ch;
+
+		switch (ch) {
+			case 1:
+				int e;
+				cout << "Enter element: ";
+				cin >> e;
+				st.push(e);
+				cout << e << " pushed\n";
+				break;
+
+			case 2:
+				st.pop();
+				cout << "Element popped\n";
+				break;
+
+			case 3:
+				cout << "Top element: " << st.peek() << endl;
+				break;
+
+			case 4:
+				st.display();
+				break;
+
+			case 5:
+				cout << "Exit\n";
+				running = 0;
+				break;
+
+			default:
+				cout << "Invalid output\n";
+				break;
+		}
+	}
+}
