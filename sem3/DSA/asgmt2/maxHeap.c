@@ -35,7 +35,7 @@ void build_max_heap(int arr[], int n, int *cmp)
 
 /*int main()
 {
-    int arr[] = {4, 1, 3, 2, 16, 9, 10, 14, 8, 7};
+    int arr[] = {3, 5, 6, 7, 20, 8, 2, 9, 12, 15, 30, 17};
     int size = sizeof(arr) / sizeof(arr[0]);
     int count = 0;
 

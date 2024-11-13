@@ -1,5 +1,5 @@
-#ifndef P1_H
-#define P1_H
+#ifndef P1A_H
+#define P1A_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,4 +21,4 @@ Polynomial *subPolynomials(const Polynomial *, const Polynomial *);
 Polynomial *multiplyPolynomials(const Polynomial *p, const Polynomial *);
 void deletePolynomial(Polynomial *);
 
-#endif // P1_H
+#endif // P1A_H

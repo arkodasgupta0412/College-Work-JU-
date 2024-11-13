@@ -24,6 +24,7 @@ public:
             }
             else
             {
+                cout << "Withdrawal of Rs " << amount << endl;
                 cout << "Insufficient funds for withdrawal! Balance remaining: " << balance << endl;
             }
         }

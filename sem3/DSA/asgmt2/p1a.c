@@ -1,4 +1,4 @@
-#include "p1.h"
+#include "p1a.h"
 
 // Create an empty polynomial
 Polynomial *createPolynomial()
@@ -29,6 +29,7 @@ void insertTerms(Polynomial *poly, int n)
             return;
         }
         poly->coefficients[exponent] += coefficient; // Add coefficient to the corresponding exponent index
+
         if (exponent > poly->degree)
         {
             poly->degree = exponent; // Update the degree of the polynomial

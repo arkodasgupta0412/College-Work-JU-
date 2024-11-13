@@ -1,18 +1,22 @@
 #include <iostream>
 using namespace std;
 
+class LinkedList;
+
 class NODE
 {
-public:
     int data;
     NODE *next;
 
+public:
     // Constructor to initialize node
-    NODE(int value)
+    NODE(int value = 0)
     {
         data = value;
         next = nullptr;
     }
+
+    friend class LinkedList;
 };
 
 // LinkedList class to manage the list operations
