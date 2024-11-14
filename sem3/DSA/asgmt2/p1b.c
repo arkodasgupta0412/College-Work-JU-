@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "p1b.h"
 
 PolyNode *createNode(double coeff, int exp)

@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "p4.h"
 
 Set *createSet(int n)

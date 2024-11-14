@@ -1,10 +1,7 @@
 #ifndef P2_H
 #define P2_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
-// Define a node for a non-zero element in the sparse matrix
+// Node definition for a non-zero element in the sparse matrix
 typedef struct Node
 {
     int row;   // Row index of the element
@@ -26,6 +23,7 @@ SparseMatrix *createSparseMatrix(int rows, int cols);
 void insertElement(SparseMatrix *mat, int row, int col, int value);
 void displaySparseMatrix(const SparseMatrix *mat);
 SparseMatrix *addSparseMatrices(const SparseMatrix *mat1, const SparseMatrix *mat2);
+SparseMatrix *subtractSparseMatrices(const SparseMatrix *mat1, const SparseMatrix *mat2);
 SparseMatrix *multiplySparseMatrices(const SparseMatrix *mat1, const SparseMatrix *mat2);
 void deleteSparseMatrix(SparseMatrix *mat);
 

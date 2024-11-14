@@ -1,9 +1,6 @@
 #ifndef P3_H
 #define P3_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
 typedef struct List
 {
 	int *data;

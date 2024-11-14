@@ -1,9 +1,6 @@
 #ifndef P1A_H
 #define P1A_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #define MAX_DEGREE 100 // Maximum degree of polynomial
 
 typedef struct Polynomial

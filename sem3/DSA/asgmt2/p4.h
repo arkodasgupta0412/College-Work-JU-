@@ -1,9 +1,6 @@
 #ifndef P4_H
 #define P4_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
 typedef struct Set
 {
     int *data;

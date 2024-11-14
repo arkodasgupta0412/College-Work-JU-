@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "p2.h"
 
 // Create a new sparse matrix
@@ -102,6 +104,51 @@ SparseMatrix *addSparseMatrices(const SparseMatrix *mat1, const SparseMatrix *ma
         else
         {
             insertElement(result, p1->row, p1->col, p1->value + p2->value);
+            p1 = p1->next;
+            p2 = p2->next;
+        }
+    }
+
+    return result;
+}
+
+SparseMatrix *subtractSparseMatrices(const SparseMatrix *mat1, const SparseMatrix *mat2)
+{
+    if (mat1->rows != mat2->rows || mat1->cols != mat2->cols)
+    {
+        printf("Matrices dimensions don't match!\n");
+        return NULL;
+    }
+
+    SparseMatrix *result = createSparseMatrix(mat1->rows, mat1->cols);
+    Node *p1 = mat1->head;
+    Node *p2 = mat2->head;
+
+    while (p1 != NULL || p2 != NULL)
+    {
+        if (p1 == NULL)
+        {
+            insertElement(result, p2->row, p2->col, p2->value);
+            p2 = p2->next;
+        }
+        else if (p2 == NULL)
+        {
+            insertElement(result, p1->row, p1->col, p1->value);
+            p1 = p1->next;
+        }
+        else if (p1->row < p2->row || (p1->row == p2->row && p1->col < p2->col))
+        {
+            insertElement(result, p1->row, p1->col, p1->value);
+            p1 = p1->next;
+        }
+        else if (p2->row < p1->row || (p2->row == p1->row && p2->col < p1->col))
+        {
+            insertElement(result, p2->row, p2->col, -p2->value);
+            p2 = p2->next;
+        }
+        else
+        {
+            insertElement(result, p1->row, p1->col, p1->value - p2->value);
             p1 = p1->next;
             p2 = p2->next;
         }

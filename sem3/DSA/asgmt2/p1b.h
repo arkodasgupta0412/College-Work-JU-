@@ -1,9 +1,6 @@
 #ifndef P1B_H
 #define P1B_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
 typedef struct PolyNode
 {
     double coeff;
