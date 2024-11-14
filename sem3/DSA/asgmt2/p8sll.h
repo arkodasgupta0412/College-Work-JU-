@@ -15,7 +15,7 @@ typedef struct Node
 Node *init_l();
 
 // creates a new Linked List Node
-Node *create(int);
+Node *createNode(int);
 
 // checks whether LL is empty or not
 int empty_l(Node *);

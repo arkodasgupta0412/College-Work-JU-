@@ -5,7 +5,7 @@ Node *init_l()
     return NULL;
 }
 
-Node *create(int data)
+Node *createNode(int data)
 {
     Node *node = (Node *)malloc(sizeof(Node));
     node->data = data;

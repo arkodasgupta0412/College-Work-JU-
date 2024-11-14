@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "p8.c"
+#include "p8sll.c"
 
 Node *build_List(FILE *fp)
 {
@@ -9,7 +9,7 @@ Node *build_List(FILE *fp)
 
     while (fscanf(fp, "%d, ", &num) != EOF)
     {
-        Node *node = create(num);
+        Node *node = createNode(num);
         if (prev == NULL)
         {
             insert_front(node, &head);
@@ -31,7 +31,7 @@ Node *build_List_Reverse(FILE *fp)
 
     while (fscanf(fp, "%d, ", &num) == 1)
     {
-        Node *node = create(num);
+        Node *node = createNode(num);
         insert_front(node, &head);
     }
     return head;

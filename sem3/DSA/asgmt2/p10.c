@@ -186,7 +186,7 @@ int main()
 Node *createLL(int size)
 {
     Node *head = init_l();
-    insert_front(create(0), &head);
+    insert_front(createNode(0), &head);
     Node *cur = head;
     int data;
 
@@ -194,7 +194,7 @@ Node *createLL(int size)
     {
         printf("Enter node %d: ", i + 1);
         scanf("%d", &data);
-        insert_after(create(data), &cur);
+        insert_after(createNode(data), &cur);
         cur = cur->next;
     }
 
@@ -336,7 +336,7 @@ Node *merge_sorted_lists(Node *head1, Node *head2)
         return list3;
     }
 
-    insert_front(create(0), &list3);
+    insert_front(createNode(0), &list3);
     // print(list3);
     Node *cur1 = head1, *cur2 = head2, *cur3 = list3;
 
@@ -344,13 +344,13 @@ Node *merge_sorted_lists(Node *head1, Node *head2)
     {
         if (cur1->data <= cur2->data)
         {
-            insert_after(create(cur1->data), &cur3);
+            insert_after(createNode(cur1->data), &cur3);
             cur1 = cur1->next;
             cur3 = cur3->next;
         }
         else
         {
-            insert_after(create(cur2->data), &cur3);
+            insert_after(createNode(cur2->data), &cur3);
             cur2 = cur2->next;
             cur3 = cur3->next;
         }
@@ -358,14 +358,14 @@ Node *merge_sorted_lists(Node *head1, Node *head2)
 
     while (cur1 != NULL)
     {
-        insert_after(create(cur1->data), &cur3);
+        insert_after(createNode(cur1->data), &cur3);
         cur1 = cur1->next;
         cur3 = cur3->next;
     }
 
     while (cur2 != NULL)
     {
-        insert_after(create(cur2->data), &cur3);
+        insert_after(createNode(cur2->data), &cur3);
         cur2 = cur2->next;
         cur3 = cur3->next;
     }
@@ -375,7 +375,7 @@ Node *merge_sorted_lists(Node *head1, Node *head2)
 
 void insert_target_node(Node **head, int target, int before)
 {
-    Node *target_node = create(target);
+    Node *target_node = createNode(target);
     if (*head == NULL || (*head)->data == before)
     {
         insert_front(target_node, head);
@@ -480,6 +480,7 @@ void rotate_list(Node **head)
     *head = last;
 }
 
+/* reverses the list in place */
 void reverse_list(Node **head)
 {
     Node *prev = NULL, *cur = *head, *nxt = (*head)->next;
@@ -530,4 +531,17 @@ void sort_list(Node **head, int op)
 
         end = cur1; // Set the last sorted node as the new end
     }
+}
+
+Node *create_reverse_list(Node *head)
+{
+    Node *revhead = init_l(), *t = head;
+
+    while (t != NULL)
+    {
+        insert_front(createNode(t->data), &revhead);
+        t = t->next;
+    }
+
+    return revhead;
 }

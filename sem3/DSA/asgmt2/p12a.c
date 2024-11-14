@@ -191,7 +191,7 @@ Node *createDLL(int size)
     {
         printf("Enter node %d: ", i + 1);
         scanf("%d", &data);
-        insert_end(create(data), &head);
+        insert_after(createNode(data), &head);
     }
 
     return head;
