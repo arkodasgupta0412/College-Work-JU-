@@ -5,3 +5,10 @@
 *.out
 
 *.vscode
+
+# ignore all pdfs
+*.pdf
+
+# ignore all doc files
+*.docx
+*.doc
